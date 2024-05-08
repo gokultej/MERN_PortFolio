@@ -561,3 +561,4 @@ const PORT = process.env.PORT || portapp;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+open('https://mern-portfolio-owdg.onrender.com/');
