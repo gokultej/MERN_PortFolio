@@ -10,7 +10,7 @@ const { GridFSBucket } = require('mongodb');
 const path = require('path');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-
+const open = require('open');
 // Create an Express application
 const app = express();
 
