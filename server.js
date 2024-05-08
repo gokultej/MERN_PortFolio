@@ -25,7 +25,7 @@ const AdminUsername=process.env.ADMIN_USERNAME;
 const AdminPassword=process.env.ADMIN_PASSWORD;
 const gmailUser = process.env.GMAIL_USER;
 const gmailPass = process.env.GMAIL_PASS;
-
+const portapp= process.env.PORT_APP;
 // Serve the static files (index.html and others)
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -557,7 +557,7 @@ app.use((req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || portapp;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
