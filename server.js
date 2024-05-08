@@ -171,7 +171,7 @@ app.post('/randa', async (req, res) => {
 // Route for the pasirandahouse page
 app.get('/pasirandahouse', requireLogin, (req, res) => {
     // If the middleware allows reaching this point, serve the pasiranda page
-    res.sendFile(path.join(__dirname, '../public/admin.html'));
+    res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
 
 // Route for the projects page
@@ -464,8 +464,8 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-    // Serve the contact HTML file
-    res.sendFile(path.join(__dirname, '/public/index.html'));
+    // Redirect to the root path
+    res.redirect('/');
 });
 
 app.get('/resume', (req, res) => {
@@ -555,6 +555,10 @@ app.use((req, res) => {
     // Redirect to hacker.html for undefined routes
     res.status(404).redirect('/hacker');
 });
+app.get('/', (req, res) => {
+    // Serve index.html
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.use((req, res, next) => {
     if (req.hostname === 'mern-portfolio-owdg.onrender.com') {
@@ -563,7 +567,6 @@ app.use((req, res, next) => {
     }
     next(); // Continue to the next middleware
 });
-
 // Start the server
 const PORT = process.env.PORT || portapp;
 app.listen(PORT, () => {
