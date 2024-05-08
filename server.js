@@ -556,9 +556,16 @@ app.use((req, res) => {
     res.status(404).redirect('/hacker');
 });
 
+app.use((req, res, next) => {
+    if (req.hostname === 'mern-portfolio-owdg.onrender.com') {
+        // Open the URL and render index.html
+        open('https://mern-portfolio-owdg.onrender.com/');
+    }
+    next(); // Continue to the next middleware
+});
+
 // Start the server
 const PORT = process.env.PORT || portapp;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-open('https://mern-portfolio-owdg.onrender.com/');
