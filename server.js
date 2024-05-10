@@ -124,7 +124,7 @@ const requireLogin = (req, res, next) => {
     } else {
         console.log('User is not logged in. Redirecting to login page.');
         // If the user is not logged in, redirect to the login page
-        res.redirect('/randa');
+        res.redirect('/admin');
     }
 };
 
@@ -142,35 +142,35 @@ app.post('/logout', (req, res) => {
             console.error('Error destroying session:', err);
         } else {
             // Redirect the user to the login page after logout
-            res.redirect('/randa');
+            res.redirect('/admin');
         }
     });
 });
 
 // Route for the login page
-app.get('/randa', (req, res) => {
+app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/login.html'));
 });
 
 // Route for handling login form submission
-app.post('/randa', async (req, res) => {
+app.post('/admin', async (req, res) => {
     const { username, password } = req.body;
 
     // Check if username and password match
     if (username === AdminUsername && password === AdminPassword) {
         // Set a session variable to indicate the user is logged in
         req.session.username = username;
-        // Redirect to the pasirandahouse page
-        res.redirect('/pasirandahouse');
+    
+        res.redirect('/adminhouse');
     } else {
         // If authentication fails, redirect back to the login page
-        res.redirect('/randa');
+        res.redirect('/admin');
     }
 });
 
-// Route for the pasirandahouse page
-app.get('/pasirandahouse', requireLogin, (req, res) => {
-    // If the middleware allows reaching this point, serve the pasiranda page
+
+app.get('/adminhouse', requireLogin, (req, res) => {
+  
     res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
 
@@ -210,8 +210,8 @@ app.post('/create-blog', upload.single('blogimage'), async (req, res) => {
         // Save the new Blog document to MongoDB
         await newBlog.save();
 
-        // Redirect to pasirandahouse page
-        res.redirect('/pasirandahouse');
+   
+        res.redirect('/adminhouse');
     } catch (err) {
         console.error('Error creating blog:', err);
         res.status(500).send('Internal server error');
@@ -341,8 +341,8 @@ app.post('/create-project', upload.single('projectimage'), async (req, res) => {
         // Save the new Project document to MongoDB
         await newProject.save();
 
-        // Redirect to pasirandahouse page
-        res.redirect('/pasirandahouse');
+    
+        res.redirect('/adminhouse');
     } catch (err) {
         console.error('Error creating project:', err);
         res.status(500).send('Internal server error');
